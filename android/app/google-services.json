@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "995024103564",
+    "project_id": "mlrapp",
+    "storage_bucket": "mlrapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:995024103564:android:6d459dc120734f453933a9",
+        "android_client_info": {
+          "package_name": "com.example.mlr_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "995024103564-5km3abr1fgepjaaj50gbo2pvrl0s24j6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWHzgOQN9yAXVPrU35j_0awCNGWYteLg0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "995024103564-5km3abr1fgepjaaj50gbo2pvrl0s24j6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
