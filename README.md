@@ -1,4 +1,4 @@
-# mlr_app
+# Codicon
 
 A new Flutter project.
 
