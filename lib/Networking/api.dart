@@ -10,32 +10,38 @@ Future<Contests> upcomingContests =
 fetchContests("start__gt", DateTime.now().toUtc().toString(), "start");
 Future<Contests> fetchContests(
     String param, String today, String orderBy) async {
+  print(today);
   var uri;
   if (param == "mid") {
+    final queryParameters = {
+      'format_time': 'true',
+    };
     uri = Uri.https("clist.by", "/api/v1/contest/", {
-      "username": "vikasgola2015",
-      "api_key": "6c30bec036ad99b28c94e98fb584ab880efb04b6",
+      "username": "arun_adithya",
+      "api_key": "e41f41cc3e6b39884d05b25018b021c2b2c46f25",
       "start__lt": today,
       "end__gt": today,
       "order_by": orderBy,
       "limit": "100",
-    });
+      "format_time":"true",
+    },);
   } else {
-    uri = Uri.https("clist.by", "/api/v1/contest/", {
-      "username": "vikasgola2015",
-      "api_key": "6c30bec036ad99b28c94e98fb584ab880efb04b6",
+    uri = Uri.https(
+      "clist.by", "/api/v1/contest/", {
+      "username": "arun_adithya",
+      "api_key": "e41f41cc3e6b39884d05b25018b021c2b2c46f25",
       param: today,
       "order_by": orderBy,
-      "limit": "100"
-    });
+      "limit": "100",
+
+    },
+    );
   }
 
   var response;
   response = await http.get(uri);
-
   if (response.statusCode == 200) {
     // If server returns an OK response, parse the JSON
-    print(response);
     return Contests.fromJSON(json.decode(response.body));
   } else {
     // If that response was not OK, throw an error.
@@ -50,6 +56,9 @@ class Contests {
     for (var contestjson in json['objects']) {
       var contest = Contest.fromJSON(contestjson);
       if (![
+        "sort-me.org",
+        'lightoj.com',
+        'e-olymp.com',
         "neerc.ifmo.ru",
         "neerc.ifmo.ru/school",
         "yandex.ru",

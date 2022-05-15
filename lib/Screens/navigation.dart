@@ -4,6 +4,8 @@ import 'package:mlr_app/Constants.dart';
 
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:mlr_app/Screens/network_screen.dart';
+import 'package:mlr_app/Screens/reminder_screen.dart';
 
 import '../Networking/api.dart';
 import 'Home.dart';
@@ -94,8 +96,20 @@ class _TabsState extends State<Tabs> {
           return ProgressBarWidget("Fetching Contests....");
         },
       ),
-      Container(color: Colors.blue,),
-      Container(color: Colors.red,),
+      FutureBuilder<List<dynamic>>(
+        future: Future.wait([liveContests,upcomingContests]),
+        builder: (contests, snapshot) {
+          if (snapshot.hasData) {
+            List<Contest> contests1 = snapshot.data![0]!.contests;
+            List<Contest> contests2 = snapshot.data![1]!.contests;
+            return NetworkScreen(contests1: contests1, contests2: contests2,);
+          } else if (snapshot.hasError) {
+            return ErrorCardWidget("No internet!!! Try restarting App.");
+          }
+          return ProgressBarWidget("Finding Live Contests....");
+        },
+      ),
+      ReminderScreen(),
       Container(color: Colors.green,)
     ];
     return Scaffold(
@@ -143,8 +157,8 @@ class _TabsState extends State<Tabs> {
                   textStyle: resourceStyle,
                 ),
                 GButton(
-                  icon: LineIcons.search,
-                  text: 'Search',
+                  icon: LineIcons.bell,
+                  text: 'Reminders',
                   textStyle: resourceStyle,
                 ),
                 GButton(

@@ -4,7 +4,7 @@ import 'package:mlr_app/Constants.dart';
 import 'dart:math' as math;
 import 'package:auto_size_text/auto_size_text.dart';
 import '../Networking/api.dart';
-import 'DetailScreen.dart';
+import 'package:mlr_app/Screens/detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   final List <Contest> contests;
