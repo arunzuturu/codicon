@@ -73,15 +73,16 @@ class _NetworkScreenState extends State<NetworkScreen> {
               SizedBox(height: size.height*0.02,),
               SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(18.0),
                   child: SizedBox(
-                    height: size.height*0.40,
+                    height: size.height*0.38,
                     child: GridView.builder(
                       itemCount: entries.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         childAspectRatio: 1,
                         mainAxisSpacing: 15,
+                        crossAxisSpacing: 15,
                       ),
                       itemBuilder: (ctx, index){
                         return buildGridChild(index, entries[index], names[index], context);
