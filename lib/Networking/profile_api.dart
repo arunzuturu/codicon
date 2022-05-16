@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:mlr_app/Models/codeforces_model.dart';
+import 'package:mlr_app/Models/leetcode_model.dart';
 import '../Models/codechef_model.dart';
 
 class APIRepository{
@@ -9,12 +11,37 @@ class APIRepository{
     final response = await http.get(url);
     if(response.statusCode == 200 )
       {
-        print(response.body);
         return CodechefModal.fromJson(jsonDecode(response.body));
       }
     else
       {
         throw Exception("Failed to load data");
       }
+  }
+  getProfileCodeforces()async{
+    var baseurl = "https://competitive-coding-api.herokuapp.com/api/codeforces/arun_adithya";
+    var url = Uri.parse(baseurl);
+    final response = await http.get(url);
+    if(response.statusCode == 200 )
+    {
+      return CodeforcesModal.fromJson(jsonDecode(response.body));
+    }
+    else
+    {
+      throw Exception("Failed to load data");
+    }
+  }
+  getProfileLeetCode()async{
+    var baseurl = "https://competitive-coding-api.herokuapp.com/api/leetcode/arun_adithya";
+    var url = Uri.parse(baseurl);
+    final response = await http.get(url);
+    if(response.statusCode == 200 )
+    {
+      return LeetCodeModel.fromJson(jsonDecode(response.body));
+    }
+    else
+    {
+      throw Exception("Failed to load data");
+    }
   }
 }
