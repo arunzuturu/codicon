@@ -1,12 +1,11 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:mlr_app/Networking/api.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../Constants.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:intl/intl.dart';
+
 class DetailScreen extends StatefulWidget {
   final Contest contest;
   const DetailScreen({Key? key, required this.contest}) : super(key: key);
@@ -53,7 +52,7 @@ class _DetailScreenState extends State<DetailScreen> {
       int id=0,
       String? title,
       String? body,
-      String? payload,}) async => _notfications.show(id, title, body,NotificationDetails(
+      String? payload,}) async => _notfications.show(id, title, body,const NotificationDetails(
      android: AndroidNotificationDetails('channel_id','channel_name',channelDescription: "Yoyo", importance: Importance.max),
      iOS: IOSNotificationDetails(),
    ));
@@ -126,14 +125,14 @@ class _DetailScreenState extends State<DetailScreen> {
                           height: size.height * 0.050,
                         ),
                         Text(
-                          "Start :           ${widget.contest.start}",
+                          "Start :           ${widget.contest.start.toString().substring(0,16)}",
                           style: resourceStyle.copyWith(fontSize: 16),
                         ),
                         SizedBox(
                           height: size.height * 0.020,
                         ),
                         Text(
-                          "Ends :           ${widget.contest.end}",
+                          "Ends :           ${widget.contest.end.toString().substring(0,16)}",
                           style: resourceStyle.copyWith(fontSize: 16),
                         ),
                         SizedBox(
@@ -224,7 +223,9 @@ class _DetailScreenState extends State<DetailScreen> {
                           height: size.height * 0.010,
                         ),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Reported!")));
+                          },
                           child: SizedBox(
                             width: size.width * 0.35,
                             child: Padding(

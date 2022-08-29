@@ -19,6 +19,7 @@ class CollectionScreen extends StatefulWidget {
 class _CollectionScreenState extends State<CollectionScreen> {
   @override
   Widget build(BuildContext context) {
+    print(widget.list2.length);
     var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: bgColor,
@@ -29,38 +30,13 @@ class _CollectionScreenState extends State<CollectionScreen> {
               SizedBox(height: size.height*0.02,),
               Text(widget.name, style: BasicTitle,),
               SizedBox(height: size.height*0.04,),
-              Text("LIVE"),
-              Padding(
-                padding: const EdgeInsets.all(18.0),
-                child: ConstrainedBox(
-                    constraints: BoxConstraints(maxHeight: size.height*0.4, minHeight: 56.0),
-                    child: (widget.list1.isNotEmpty)  ? ListView.builder(
-                      shrinkWrap: true,
-                        itemCount: widget.list1.length,
-                        itemBuilder: (context, index) {
-                          var str = widget.list1[index].end.toString();
-                          if (str != null && str.length >= 5) {
-                            str = str.substring(0, str.length - 7);
-                          }
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 15),
-                            child: contentCard(size,
-                                widget.list1[index].event.toString(),widget.list1[index].resource.toString(),str,
-                                widget.list1[index]
-                            ),
-                          );
-                        }): Center(child: Text("No Contests at the Moment!"))
-                )
-                ,
-
-              ),
-              SizedBox(height: size.height*0.04,),
               Text("UPCOMING"),
               Padding(
                 padding: const EdgeInsets.all(18.0),
-                child: SizedBox(
-                    height: size.height*0.40,
-                    child:(widget.list1.isNotEmpty)  ? ListView.builder(
+                child: ConstrainedBox(
+                    constraints: BoxConstraints(maxHeight: size.height*0.6, minHeight: 56.0),
+                    child: (widget.list2.isNotEmpty)  ? ListView.builder(
+                      shrinkWrap: true,
                         itemCount: widget.list2.length,
                         itemBuilder: (context, index) {
                           var str = widget.list2[index].end.toString();
@@ -72,6 +48,31 @@ class _CollectionScreenState extends State<CollectionScreen> {
                             child: contentCard(size,
                                 widget.list2[index].event.toString(),widget.list2[index].resource.toString(),str,
                                 widget.list2[index]
+                            ),
+                          );
+                        }): Center(child: Text("No Contests at the Moment!"))
+                )
+                ,
+
+              ),
+              SizedBox(height: size.height*0.04,),
+              Text("LIVE"),
+              Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: SizedBox(
+                    height: size.height*0.30,
+                    child:(widget.list1.isNotEmpty)  ? ListView.builder(
+                        itemCount: widget.list1.length,
+                        itemBuilder: (context, index) {
+                          var str = widget.list1[index].end.toString();
+                          if (str != null && str.length >= 5) {
+                            str = str.substring(0, str.length - 7);
+                          }
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 15),
+                            child: contentCard(size,
+                                widget.list1[index].event.toString(),widget.list1[index].resource.toString(),str,
+                                widget.list1[index]
                             ),
                           );
                         }): Text("No information from website!")),

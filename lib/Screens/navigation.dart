@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mlr_app/Constants.dart';
-
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:mlr_app/Screens/dummy_screen.dart';
 import 'package:mlr_app/Screens/network_screen.dart';
+import 'package:mlr_app/Screens/profile_form.dart';
 import 'package:mlr_app/Screens/reminder_screen.dart';
-
 import '../Networking/api.dart';
 import '../Networking/profile_api.dart';
 import 'Home.dart';
+
 class ErrorCardWidget extends StatelessWidget {
   final String text;
   ErrorCardWidget(this.text);
@@ -126,19 +126,21 @@ class _TabsState extends State<Tabs> {
           return ProgressBarWidget("Finding Live Contests....");
         },
       ),
-      ReminderScreen(),
-      FutureBuilder<List<dynamic>>(
-        future: Future.wait([_getTaskAsync1,_getTaskAsync2,_getTaskAsync3]),
-        // future: Future.wait([APIRepository().getProfileCodechef(),APIRepository().getProfileCodeforces(), APIRepository().getProfileLeetCode()]),
-        builder: (contests, snapshot) {
-          if (snapshot.hasData) {
-            return Dummy(leetcode: snapshot.data![2], codeforces:snapshot.data![1] , codechef: snapshot.data![0],);
-          } else if (snapshot.hasError) {
-            return ErrorCardWidget("No internet!!! Try restarting App.");
-          }
-          return ProgressBarWidget("Fetching Data....");
-        },
-      ),
+      const ReminderScreen(),
+      //This code represents the Profile Screen Implement it Later
+      // FutureBuilder<List<dynamic>>(
+      //   future: Future.wait([_getTaskAsync1,_getTaskAsync2,_getTaskAsync3]),
+      //   // future: Future.wait([APIRepository().getProfileCodechef(),APIRepository().getProfileCodeforces(), APIRepository().getProfileLeetCode()]),
+      //   builder: (contests, snapshot) {
+      //     if (snapshot.hasData) {
+      //       return Dummy(leetcode: snapshot.data![2], codeforces:snapshot.data![1] , codechef: snapshot.data![0],);
+      //     } else if (snapshot.hasError) {
+      //       return ErrorCardWidget("No internet!!! Try restarting App.");
+      //     }
+      //     return ProgressBarWidget("Fetching Data....");
+      //   },
+      // ),
+      ProfileForm()
     ];
     return Scaffold(
       backgroundColor: bgColor,
@@ -164,13 +166,11 @@ class _TabsState extends State<Tabs> {
              setState(() {
              _currentIndex = index;
              });},
-              // rippleColor: Colors.grey[300]!,
-              // hoverColor: Colors.grey[100]!,
               gap: 8,
               activeColor: Colors.white,
               iconSize: 24,
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              duration: Duration(milliseconds: 500),
+              duration: const Duration(milliseconds: 500),
               tabBackgroundColor: buttonColor,
               color: buttonColor,
               tabs: [
@@ -202,34 +202,4 @@ class _TabsState extends State<Tabs> {
     );
   }
 
-  // getdata() async {
-  //   await Future.delayed(const Duration(milliseconds: 600));
-  //   return await ContestsApiRepository().getDataFromInternet();
-  // }
-  // bottomNavigationBar: BottomNavigationBar(
-  // backgroundColor: kMainBgColor,
-  // onTap: (int index) {
-  // setState(() {
-  // _currentIndex = index;
-  // });
-  // },
-  // selectedItemColor: Colors.white,
-  // currentIndex: _currentIndex,
-  // items: [
-  // BottomNavigationBarItem(
-  // backgroundColor: kCardBgColor,
-  // activeIcon: Image.asset('assets/images/home.png',width: 24,height: 24,color: kNavVioletColor,),
-  // icon: Image.asset('assets/images/home.png',width: 24,height: 24,),
-  // label: 'Home',
-  // ),
-  // BottomNavigationBarItem(
-  // icon: Icon(Icons.update),
-  // label: "New"
-  // ),
-  // BottomNavigationBarItem(
-  // icon: Icon(Icons.done),
-  // label: "New"
-  // )
-  // ],
-  // ),
 }

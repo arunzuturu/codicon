@@ -75,7 +75,11 @@ android {
 flutter {
     source '../..'
 }
-
+configurations {
+    all {
+        exclude module: 'httpclient'
+    }
+}
 dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-messaging'

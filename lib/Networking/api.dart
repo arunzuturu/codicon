@@ -4,25 +4,19 @@ import 'package:http/http.dart' as http;
 
 Future<Contests> liveContests =
 fetchContests("mid", DateTime.now().toUtc().toString(), "-start");
-Future<Contests> completedContests =
-fetchContests("end__lt", DateTime.now().toUtc().toString(), "-start");
 Future<Contests> upcomingContests =
 fetchContests("start__gt", DateTime.now().toUtc().toString(), "start");
 Future<Contests> fetchContests(
     String param, String today, String orderBy) async {
-  print(today);
-  var uri;
+  Uri uri;
   if (param == "mid") {
-    final queryParameters = {
-      'format_time': 'true',
-    };
     uri = Uri.https("clist.by", "/api/v1/contest/", {
       "username": "arun_adithya",
       "api_key": "e41f41cc3e6b39884d05b25018b021c2b2c46f25",
       "start__lt": today,
       "end__gt": today,
       "order_by": orderBy,
-      "limit": "100",
+      "limit": "300",
       "format_time":"true",
     },);
   } else {
@@ -32,13 +26,12 @@ Future<Contests> fetchContests(
       "api_key": "e41f41cc3e6b39884d05b25018b021c2b2c46f25",
       param: today,
       "order_by": orderBy,
-      "limit": "100",
-
+      "limit": "300",
     },
     );
   }
 
-  var response;
+  http.Response response;
   response = await http.get(uri);
   if (response.statusCode == 200) {
     // If server returns an OK response, parse the JSON
@@ -67,7 +60,7 @@ class Contests {
         "acmp.ru",
         "acmu.ru",
         "dl.gsu.by"
-      ].contains(contest.resource)) this.contests.add(contest);
+      ].contains(contest.resource)) contests.add(contest);
     }
   }
 }
@@ -97,7 +90,7 @@ class Contest {
     return Contest(
       id: json['id'],
       event: json['event'],
-      resource: json['resource']['name'],
+      resource: json['resource']['name'].toString(),
       start: start.toLocal(),
       end: end.toLocal(),
       duration: json['duration'],

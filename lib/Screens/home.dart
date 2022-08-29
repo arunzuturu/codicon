@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 key: PageStorageKey(this.widget.which),
                   itemCount: widget.contests.length,
                   itemBuilder: (context, index) {
-                    var str = widget.contests[index].end.toString();
+                    var str = widget.contests[index].start.toString();
                     if (str != null && str.length >= 5) {
                       str = str.substring(0, str.length - 7);
                     }
@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget contentCard(size,event,resource,ends,contest) {
+  Widget contentCard(size,event,resource,starts,contest) {
     return Padding(
       padding: const EdgeInsets.only(left: 4,right: 4, bottom: 10,top: 15),
       child: Container(
@@ -110,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: size.width *0.5,
                     child: AutoSizeText("Resource : ${resource}", style: resourceStyle,)),
                 SizedBox(height: 10,),
-                Text("Ends at : ${ends}", style: resourceStyle,),
+                Text("Starts at : ${starts}", style: resourceStyle,),
               ],
             ),
             Padding(

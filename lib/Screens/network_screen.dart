@@ -13,7 +13,6 @@ class NetworkScreen extends StatefulWidget {
   final  List<Contest> contests1;
   final List<Contest> contests2;
   const NetworkScreen({Key? key, required this.contests1, required this.contests2}) : super(key: key);
-
   @override
   State<NetworkScreen> createState() => _NetworkScreenState();
 }
@@ -182,12 +181,10 @@ class _NetworkScreenState extends State<NetworkScreen> {
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
     child: InkWell(
       onTap: () {
-        // final list1 = widget.contests1.where((o) => o.resource == 'codechef.com').toList();
-        // final list2 = [];
         switch(id) {
           case 0:
-            final list1 = widget.contests1.where((o) => o.resource == 'codechef.com').toList();
-            final list2 = widget.contests2.where((o) => o.resource == 'codechef.com').toList();
+            final list1 = widget.contests1.where((o) => o.resource.toString() == "codechef.com").toList();
+            final list2 = widget.contests2.where((o) => o.resource.toString() == "codechef.com").toList();
             Navigator.push(
                 context, MaterialPageRoute(builder: (BuildContext context) => CollectionScreen(id: id, name: name, list2: list2 , list1: list1,)));
             break;
