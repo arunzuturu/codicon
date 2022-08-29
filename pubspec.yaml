@@ -5,6 +5,7 @@ version: 1.0.0+1
 environment:
   sdk: ">=2.15.1 <3.0.0"
 dependencies:
+  shared_preferences:
   card_swiper:
   url_launcher:
   line_icons:

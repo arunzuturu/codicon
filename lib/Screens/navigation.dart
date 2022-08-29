@@ -7,6 +7,7 @@ import 'package:mlr_app/Screens/dummy_screen.dart';
 import 'package:mlr_app/Screens/network_screen.dart';
 import 'package:mlr_app/Screens/profile_form.dart';
 import 'package:mlr_app/Screens/reminder_screen.dart';
+import 'package:mlr_app/shared_pref.dart';
 import '../Networking/api.dart';
 import '../Networking/profile_api.dart';
 import 'Home.dart';
@@ -85,6 +86,8 @@ class _TabsState extends State<Tabs> {
   late Future _getTaskAsync1;
   late Future _getTaskAsync2;
   late Future _getTaskAsync3;
+  late bool first;
+
   @override
   void initState() {
     _getTaskAsync1 = APIRepository().getProfileCodechef();
@@ -92,6 +95,15 @@ class _TabsState extends State<Tabs> {
     _getTaskAsync3 = APIRepository().getProfileLeetCode();
     super.initState();
   }
+  void getFirst() async
+  {
+     var k = await SharedPref().isFirstTimeUser();
+     setState(() {
+       first = k;
+     });
+  }
+
+
   
   int _currentIndex = 0;
   final key = new GlobalKey<ScaffoldState>();
@@ -100,6 +112,7 @@ class _TabsState extends State<Tabs> {
   @override
   
   Widget build(BuildContext context) {
+
     _children = [
       FutureBuilder<Contests>(
         future: upcomingContests,
