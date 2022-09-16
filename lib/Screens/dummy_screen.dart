@@ -41,7 +41,6 @@ class _DummyState extends State<Dummy> {
                     ),
                   ),
                 ),
-
                 CardLeetCode(widget.leetcode,size),
                 CardC(widget.codechef,size),
                 CardCodeForces(widget.codeforces,size),

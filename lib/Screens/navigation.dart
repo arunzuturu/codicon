@@ -5,7 +5,6 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:mlr_app/Screens/dummy_screen.dart';
 import 'package:mlr_app/Screens/network_screen.dart';
-import 'package:mlr_app/Screens/profile_form.dart';
 import 'package:mlr_app/Screens/reminder_screen.dart';
 import 'package:mlr_app/shared_pref.dart';
 import '../Networking/api.dart';
@@ -73,7 +72,10 @@ class ProgressBarWidget extends StatelessWidget {
 }
 
 class Tabs extends StatefulWidget {
-  const Tabs({Key? key}) : super(key: key);
+  final codechef;
+  final codeforces;
+  final leetcode;
+  const Tabs({Key? key, this.codechef, this.codeforces, this.leetcode}) : super(key: key);
 
   @override
 
@@ -90,9 +92,9 @@ class _TabsState extends State<Tabs> {
 
   @override
   void initState() {
-    _getTaskAsync1 = APIRepository().getProfileCodechef();
-    _getTaskAsync2 = APIRepository().getProfileCodeforces();
-    _getTaskAsync3 = APIRepository().getProfileLeetCode();
+    _getTaskAsync1 = APIRepository().getProfileCodechef(widget.codechef);
+    _getTaskAsync2 = APIRepository().getProfileCodeforces(widget.codeforces);
+    _getTaskAsync3 = APIRepository().getProfileLeetCode(widget.leetcode);
     super.initState();
   }
   void getFirst() async
@@ -114,18 +116,6 @@ class _TabsState extends State<Tabs> {
   Widget build(BuildContext context) {
 
     _children = [
-      FutureBuilder<Contests>(
-        future: upcomingContests,
-        builder: (contests, snapshot) {
-          if (snapshot.hasData) {
-            List<Contest> contests = snapshot.data!.contests;
-            return HomeScreen(contests: contests, which: "live",);
-          } else if (snapshot.hasError) {
-            return ErrorCardWidget("No internet!!! Try restarting App.");
-          }
-          return ProgressBarWidget("Fetching Contests....");
-        },
-      ),
       FutureBuilder<List<dynamic>>(
         future: Future.wait([liveContests,upcomingContests]),
         builder: (contests, snapshot) {
@@ -139,21 +129,31 @@ class _TabsState extends State<Tabs> {
           return ProgressBarWidget("Finding Live Contests....");
         },
       ),
+      FutureBuilder<Contests>(
+        future: upcomingContests,
+        builder: (contests, snapshot) {
+          if (snapshot.hasData) {
+            List<Contest> contests = snapshot.data!.contests;
+            return HomeScreen(contests: contests, which: "live",);
+          } else if (snapshot.hasError) {
+            return ErrorCardWidget("No internet!!! Try restarting App.");
+          }
+          return ProgressBarWidget("Fetching Contests....");
+        },
+      ),
       const ReminderScreen(),
-      //This code represents the Profile Screen Implement it Later
-      // FutureBuilder<List<dynamic>>(
-      //   future: Future.wait([_getTaskAsync1,_getTaskAsync2,_getTaskAsync3]),
-      //   // future: Future.wait([APIRepository().getProfileCodechef(),APIRepository().getProfileCodeforces(), APIRepository().getProfileLeetCode()]),
-      //   builder: (contests, snapshot) {
-      //     if (snapshot.hasData) {
-      //       return Dummy(leetcode: snapshot.data![2], codeforces:snapshot.data![1] , codechef: snapshot.data![0],);
-      //     } else if (snapshot.hasError) {
-      //       return ErrorCardWidget("No internet!!! Try restarting App.");
-      //     }
-      //     return ProgressBarWidget("Fetching Data....");
-      //   },
-      // ),
-      ProfileForm()
+      FutureBuilder<List<dynamic>>(
+        future: Future.wait([_getTaskAsync1,_getTaskAsync2,_getTaskAsync3]),
+        // future: Future.wait([APIRepository().getProfileCodechef(),APIRepository().getProfileCodeforces(), APIRepository().getProfileLeetCode()]),
+        builder: (contests, snapshot) {
+          if (snapshot.hasData) {
+            return Dummy(leetcode: snapshot.data![2], codeforces:snapshot.data![1] , codechef: snapshot.data![0],);
+          } else if (snapshot.hasError) {
+            return ErrorCardWidget("Something went wrong with usernames!");
+          }
+          return ProgressBarWidget("Fetching Data....");
+        },
+      ),
     ];
     return Scaffold(
       backgroundColor: bgColor,

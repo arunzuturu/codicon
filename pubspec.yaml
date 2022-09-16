@@ -16,7 +16,6 @@ dependencies:
   firebase_core: ^1.13.1
   firebase_auth: ^3.3.10
   cloud_firestore: ^3.1.10
-  firebase_messaging: ^13.0.0
   awesome_notifications: any
   flutter_local_notifications: ^9.4.0
   flutter:
