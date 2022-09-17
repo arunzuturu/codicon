@@ -2,7 +2,7 @@
     package="com.example.mlr_app">
    <application
 
-        android:label="Codicon"
+        android:label="CodiCon"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

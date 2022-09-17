@@ -1,6 +1,7 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:mlr_app/Screens/Onboarding/landing.dart';
 import 'package:mlr_app/Screens/profile_form.dart';
 import 'package:mlr_app/shared_pref.dart';
 import 'Screens/navigation.dart';
@@ -38,9 +39,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String codeforces="";
-  String codechef="";
-  String leetcode="";
+  String? codeforces="";
+  String? codechef="";
+  String? leetcode="";
   bool first = true;
   @override
   void initState() {
@@ -51,13 +52,13 @@ class _MyAppState extends State<MyApp> {
   }
   void getValues() async
   {
-    String codec = await SharedPref().codechefGetUser();
-    String codef = await SharedPref().codeforcesGetUser();
-    String leet = await SharedPref().leetCodeGetUser();
+    var codec = await SharedPref().codechefGetUser();
+    var codef = await SharedPref().codeforcesGetUser();
+    var leet = await SharedPref().leetCodeGetUser();
     setState(() {
-      codeforces = codef;
-      leetcode = leet;
-      codechef = codec;
+      codeforces = codef.toString();
+      leetcode = leet.toString();
+      codechef = codec.toString();
     });
   }
   void getFirst() async
@@ -75,7 +76,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primaryColor: Colors.blue[900],
       ),
-      home: first? ProfileForm(first: first,):Tabs(codeforces: codeforces,codechef: codechef,leetcode: leetcode,),
+      home: first? Landing(first: first,):Tabs(codeforces: codeforces,codechef: codechef,leetcode: leetcode,),
     );
   }
 }

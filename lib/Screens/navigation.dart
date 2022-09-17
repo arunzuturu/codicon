@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mlr_app/Constants.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:mlr_app/Screens/Settings/profile_edit.dart';
 import 'package:mlr_app/Screens/dummy_screen.dart';
 import 'package:mlr_app/Screens/network_screen.dart';
 import 'package:mlr_app/Screens/reminder_screen.dart';
@@ -147,7 +149,23 @@ class _TabsState extends State<Tabs> {
           if (snapshot.hasData) {
             return Dummy(leetcode: snapshot.data![2], codeforces:snapshot.data![1] , codechef: snapshot.data![0],);
           } else if (snapshot.hasError) {
-            return ErrorCardWidget("Something went wrong with usernames!");
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ErrorCardWidget("Something went wrong with usernames!"),
+                SizedBox(height: 20,),
+                ElevatedButton(onPressed: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfileEdit()),
+                  );
+                }, child: Text("Edit usernames", style: GoogleFonts.montserrat(
+                  fontWeight: FontWeight.bold
+                ),),
+                  style: ElevatedButton.styleFrom(primary: kButtonVioletColor),
+                )
+              ],
+            );
           }
           return ProgressBarWidget("Fetching Data....");
         },

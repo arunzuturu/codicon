@@ -8,10 +8,6 @@ import 'package:mlr_app/Models/leetcode_model.dart';
 import 'package:mlr_app/Screens/Settings/settings_screen.dart';
 
 
-import '../Networking/profile_api.dart';
-import 'navigation.dart';
-
-
 class Dummy extends StatefulWidget {
   final CodeforcesModal codeforces;
   final CodechefModal codechef;
@@ -110,7 +106,6 @@ class _DummyState extends State<Dummy> {
             Text(" Rating : ${data.res![1].rating!.substring(0,4)}",style: resourceStyle),
             Text(" Username : ${data.res![2].username}",style: resourceStyle),
             Text(" Country : ${data.res![3].country}",style: resourceStyle),
-            // Text(" State : ${data.res![4].state}",style: resourceStyle),
           ],
         ),
       ),

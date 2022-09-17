@@ -113,7 +113,7 @@ class _ProfileFormState extends State<ProfileForm> {
                       onPressed: () async{
                         if (_formKey.currentState!
                             .validate()) {
-                          await SharedPref().isFirstTimeUser();
+                          await SharedPref().setFirstTime();
                           await SharedPref().codechefSetUser(_codechef.text.toString()) as String;
                           await SharedPref().codeforcesSetUser(_codeForces.text.toString()) as String;
                           await SharedPref().leetCodeSetUser(_leetCode.text.toString()) as String;

@@ -8,10 +8,16 @@ class SharedPref{
       sharedPreferences.setBool('isFirstTimeUser', true);
       return sharedPreferences.getBool('isFirstTimeUser');
     } else {
-      sharedPreferences.setBool('isFirstTimeUser', false);
       return sharedPreferences.getBool('isFirstTimeUser');
     }
   }
+  setFirstTime() async
+  {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setBool('isFirstTimeUser', false);
+    return sharedPreferences.getBool('isFirstTimeUser');
+  }
+
   codechefSetUser(String username) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
       sharedPreferences.setString('codechef', username);
@@ -19,7 +25,13 @@ class SharedPref{
   }
   codechefGetUser() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.getString('codechef');
+    if(sharedPreferences.getString('codechef')==null) {
+      return "";
+    }
+    else
+      {
+        return sharedPreferences.getString('codechef');
+      }
   }
   codeforcesSetUser(String username) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -28,12 +40,24 @@ class SharedPref{
   }
   codeforcesGetUser() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.getString('codeforces');
+    if(sharedPreferences.getString('codeforces')==null) {
+      return "";
+    }
+    else
+    {
+      return sharedPreferences.getString('codeforces');
+    }
   }
   leetCodeSetUser(String username) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.setString('leetCode', username);
-    return sharedPreferences.getString('leetCode');
+    if(sharedPreferences.getString('leetCode')==null) {
+      return "";
+    }
+    else
+    {
+      return sharedPreferences.getString('leetCode');
+    }
   }
   leetCodeGetUser() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
