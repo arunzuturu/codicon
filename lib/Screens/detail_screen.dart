@@ -5,6 +5,9 @@ import 'package:mlr_app/Networking/api.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../Constants.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
+import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 
 class DetailScreen extends StatefulWidget {
   final Contest contest;
@@ -31,23 +34,27 @@ String formattedTime(int value) {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+
   late final _notfications = FlutterLocalNotificationsPlugin();
    void onSelectNotification(String? payload) => LaunchUrl(payload!, context);
 
   _scheduleNotification(String start, String event, Contest resource, String href, int duration) async {
-    var android = AndroidNotificationDetails('channel id', 'channel name');
-    var iOS = IOSNotificationDetails();
+    final String currentTimeZone = await FlutterNativeTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(currentTimeZone));
+    print(start);
+    var android = const AndroidNotificationDetails('channel id', 'channel name');
+    var iOS = const IOSNotificationDetails();
     var platform = NotificationDetails(android: android, iOS: iOS);
-    var scheduledNotificationDateTime = DateTime.parse(start).subtract(Duration(hours: 1));
-    await _notfications.schedule(
+    var formats =  DateTime.parse(start).subtract(const Duration(hours: 1)).toString();
+    var time = tz.TZDateTime.parse(tz.local, formats);
+    await _notfications.zonedSchedule(
         Random().nextInt(200),
         'The Competition $event is going to start in 1 Hour on ${resource.resource}',
-        'Be Prepared - Best of Luck - $scheduledNotificationDateTime',
-        scheduledNotificationDateTime,
+        'Be Prepared - Best of Luck - $time',
+        time,
         platform,
-        payload: href);
+        payload: href, uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime, androidAllowWhileIdle: true);
   }
-
    Future showNotification({
       int id=0,
       String? title,
@@ -62,6 +69,8 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   void initState() {
     super.initState();
+    tz.initializeTimeZones();
+
     // _notfications = FlutterLocalNotificationsPlugin();
     var android = AndroidInitializationSettings('@mipmap/ic_launcher');
     var iOS = IOSInitializationSettings();
@@ -82,6 +91,18 @@ class _DetailScreenState extends State<DetailScreen> {
           child: Column(
             children: [
               // SizedBox(height: size.height*0.08,),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                    padding: const EdgeInsets.only(left: 28.0, top: 20),
+                    child: IconButton(
+                      onPressed: (){
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(Icons.arrow_back, size: 30,color: Colors.white,),
+                    )
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.only(left: 30.0, top: 20),
                 child: Align(
@@ -174,20 +195,13 @@ class _DetailScreenState extends State<DetailScreen> {
                                       widget.contest.duration!.toInt(),
                                     );
                                     print(_notfications.pendingNotificationRequests());
-                                    showNotification(title: "Contest Update on ${widget.contest.event.toString()}", body: "You will be reminded shortly!", payload: "yay");
+                                    showNotification(title: "Notification is Set", body: "You will be reminded 1hr before contest!", payload: "yay");
                                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Notification set")));
                                   },
                                   ),
 
                                 ));
                               }
-
-
-
-
-
-
-
                           },
                           child: SizedBox(
                             width: size.width * 0.36,

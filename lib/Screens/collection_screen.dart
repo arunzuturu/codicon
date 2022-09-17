@@ -27,7 +27,19 @@ class _CollectionScreenState extends State<CollectionScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: size.height*0.02,),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                    padding: const EdgeInsets.only(left: 28.0, top: 20),
+                    child: IconButton(
+                      onPressed: (){
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(Icons.arrow_back, size: 30,),
+                    )
+                ),
+              ),
+              // SizedBox(height: size.height*0.02,),
               Text(widget.name, style: BasicTitle,),
               SizedBox(height: size.height*0.04,),
               Text("UPCOMING"),

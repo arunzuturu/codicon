@@ -2,7 +2,7 @@
     package="com.example.mlr_app">
    <application
 
-        android:label="mlr_app"
+        android:label="Codicon"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -32,4 +32,5 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
 </manifest>

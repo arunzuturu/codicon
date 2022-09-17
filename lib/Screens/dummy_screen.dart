@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icon.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:mlr_app/Constants.dart';
 import 'package:mlr_app/Models/codechef_model.dart';
 import 'package:mlr_app/Models/codeforces_model.dart';
 import 'package:mlr_app/Models/leetcode_model.dart';
+import 'package:mlr_app/Screens/Settings/settings_screen.dart';
 
 
 import '../Networking/profile_api.dart';
@@ -27,25 +30,38 @@ class _DummyState extends State<Dummy> {
       backgroundColor: bgColor,
       body: SafeArea(
         child: Center(
-          child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 28.0, top: 20),
-                    child: Text(
-                      "PROFILE",
-                      style: BasicTitle,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 28.0, top: 20),
+                      child: Text(
+                        "PROFILE",
+                        style: BasicTitle,
+                      ),
                     ),
                   ),
-                ),
-                CardLeetCode(widget.leetcode,size),
-                CardC(widget.codechef,size),
-                CardCodeForces(widget.codeforces,size),
-              ],
-            ),
+                 Padding(
+                   padding: const EdgeInsets.only(right: 28.0, top: 20),
+                   child: IconButton(onPressed: (){
+                     Navigator.push(
+                       context,
+                       MaterialPageRoute(builder: (context) => Settings()),
+                     );
+
+                   }, icon: Icon(LineIcons.cog, size: 30,)),
+                 )
+                ],
+              ),
+              CardLeetCode(widget.leetcode,size),
+              CardC(widget.codechef,size),
+              CardCodeForces(widget.codeforces,size),
+            ],
           ),
         ),
       ),
@@ -89,7 +105,9 @@ class _DummyState extends State<Dummy> {
               ),
             ),
             Text(" Name : ${data!.res![0].name}",style: resourceStyle,),
-            Text(" Rating : ${data.res![1].rating}",style: resourceStyle),
+            data.res![1].rating!.length <4 ?
+            Text(" Rating : ${data.res![1].rating}",style: resourceStyle):
+            Text(" Rating : ${data.res![1].rating!.substring(0,4)}",style: resourceStyle),
             Text(" Username : ${data.res![2].username}",style: resourceStyle),
             Text(" Country : ${data.res![3].country}",style: resourceStyle),
             // Text(" State : ${data.res![4].state}",style: resourceStyle),

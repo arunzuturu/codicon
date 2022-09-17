@@ -45,25 +45,23 @@ class ProgressBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Card(
-          color: kCardBgColor,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: new Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  child: new Text(
-                    this.text,
-                    style: new TextStyle(fontSize: 18.0, color: Colors.white),
-                  ),
-                  margin: EdgeInsets.all(16.0),
+    return Center(
+      child: Card(
+        color: kCardBgColor,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                margin: const EdgeInsets.all(16.0),
+                child: Text(
+                  text,
+                  style: const TextStyle(fontSize: 18.0, color: Colors.white),
                 ),
-                new CircularProgressIndicator(),
-              ],
-            ),
+              ),
+              const CircularProgressIndicator(),
+            ],
           ),
         ),
       ),
@@ -97,6 +95,7 @@ class _TabsState extends State<Tabs> {
     _getTaskAsync3 = APIRepository().getProfileLeetCode(widget.leetcode);
     super.initState();
   }
+
   void getFirst() async
   {
      var k = await SharedPref().isFirstTimeUser();
@@ -114,14 +113,13 @@ class _TabsState extends State<Tabs> {
   @override
   
   Widget build(BuildContext context) {
-
     _children = [
-      FutureBuilder<List<dynamic>>(
+      FutureBuilder<List<Contests>>(
         future: Future.wait([liveContests,upcomingContests]),
         builder: (contests, snapshot) {
           if (snapshot.hasData) {
-            List<Contest> contests1 = snapshot.data![0]!.contests;
-            List<Contest> contests2 = snapshot.data![1]!.contests;
+            List<Contest> contests1 = snapshot.data![0].contests;
+            List<Contest> contests2 = snapshot.data![1].contests;
             return NetworkScreen(contests1: contests1, contests2: contests2,);
           } else if (snapshot.hasError) {
             return ErrorCardWidget("No internet!!! Try restarting App.");
@@ -182,7 +180,7 @@ class _TabsState extends State<Tabs> {
               gap: 8,
               activeColor: Colors.white,
               iconSize: 24,
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               duration: const Duration(milliseconds: 500),
               tabBackgroundColor: buttonColor,
               color: buttonColor,
@@ -214,5 +212,4 @@ class _TabsState extends State<Tabs> {
       ),
     );
   }
-
 }

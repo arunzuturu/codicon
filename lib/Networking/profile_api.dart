@@ -35,7 +35,6 @@ class APIRepository{
     var baseurl = "https://competitive-coding-api.herokuapp.com/api/leetcode/$username";
     var url = Uri.parse(baseurl);
     final response = await http.get(url);
-    print(response.body);
     if(response.statusCode == 200 )
     {
       return LeetCodeModel.fromJson(jsonDecode(response.body));
