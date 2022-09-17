@@ -160,7 +160,7 @@ Widget fieldWidget (title,size,controller,validator, context)
       SizedBox(height: size.height * 0.01,),
       Container(
         width: size.width * 0.82,
-        height: size.height * 0.064,
+        height: size.height * 0.08,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           boxShadow: [
