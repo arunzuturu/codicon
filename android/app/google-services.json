@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "995024103564",
-    "project_id": "mlrapp",
-    "storage_bucket": "mlrapp.appspot.com"
+    "project_number": "202030547973",
+    "project_id": "codicon-fcfc0",
+    "storage_bucket": "codicon-fcfc0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:995024103564:android:6d459dc120734f453933a9",
+        "mobilesdk_app_id": "1:202030547973:android:2e558f7dae99a272f3886c",
         "android_client_info": {
-          "package_name": "com.example.mlr_app"
+          "package_name": "com.arun.codicon"
         }
       },
       "oauth_client": [
         {
-          "client_id": "995024103564-5km3abr1fgepjaaj50gbo2pvrl0s24j6.apps.googleusercontent.com",
+          "client_id": "202030547973-v52apsl76jca16gu8fp7n9grnekhlc7h.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCWHzgOQN9yAXVPrU35j_0awCNGWYteLg0"
+          "current_key": "AIzaSyDr6JhYYqZvgN2taXSbevWJezocUoPy3mo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "995024103564-5km3abr1fgepjaaj50gbo2pvrl0s24j6.apps.googleusercontent.com",
+              "client_id": "202030547973-v52apsl76jca16gu8fp7n9grnekhlc7h.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
