@@ -1,16 +1,9 @@
 # Codicon
 
-A new Flutter project.
+CodiCon tends to provide a seamless way to view live and upcoming coding contests across the world.
+LIVE : The coding contests that happen live on the internet are displayed to view, and visit the contest page from within the app,
+UPCOMING : All the upcoming coding contests from more than 13+ websites are available to fetch and they also include an option to set reminders.
+REMINDERS : Select the contests that you want to be reminded for and set a local notification for that contest. Receive the notification of the contest 1hr prior. You can edit the reminders and cancel them individually or all at once based on your preferences
+PROFILES : Codicon can also fetch your personal coding profiles to view scores within the app. Your live scores from the coding contest websites are fetched from the internet and show within the app. Edit these usernames within the settings and set required profiles
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Now available on [Playstore]https://play.google.com/store/apps/details?id=com.arun.codicon&hl=en&gl=US
