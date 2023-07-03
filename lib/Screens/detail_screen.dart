@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_timezone_updated_gradle/flutter_native_timezone.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:mlr_app/Networking/api.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -7,7 +8,6 @@ import '../Constants.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
-import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 
 class DetailScreen extends StatefulWidget {
   final Contest contest;
@@ -318,13 +318,15 @@ class _DetailScreenState extends State<DetailScreen> {
     if (await canLaunch(href)) {
       await launch(href);
     } else {
-      Scaffold.of(context).showSnackBar(SnackBar(
+
+      var snackBar = SnackBar(
         action: SnackBarAction(
           onPressed: () {},
           label: 'Okay',
         ),
         content: Text('Cannot Redirect you to $href', style: TextStyle()),
-      ));
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
 }

@@ -92,7 +92,7 @@ class _TabsState extends State<Tabs> {
 
   @override
   void initState() {
-    _getTaskAsync1 = APIRepository().getProfileCodechef(widget.codechef);
+    // _getTaskAsync1 = APIRepository().getProfileCodechef(widget.codechef);
     _getTaskAsync2 = APIRepository().getProfileCodeforces(widget.codeforces);
     _getTaskAsync3 = APIRepository().getProfileLeetCode(widget.leetcode);
     super.initState();
@@ -143,11 +143,11 @@ class _TabsState extends State<Tabs> {
       ),
       const ReminderScreen(),
       FutureBuilder<List<dynamic>>(
-        future: Future.wait([_getTaskAsync1,_getTaskAsync2,_getTaskAsync3]),
+        future: Future.wait([_getTaskAsync2,_getTaskAsync3]),
         // future: Future.wait([APIRepository().getProfileCodechef(),APIRepository().getProfileCodeforces(), APIRepository().getProfileLeetCode()]),
         builder: (contests, snapshot) {
           if (snapshot.hasData) {
-            return Dummy(leetcode: snapshot.data![2], codeforces:snapshot.data![1] , codechef: snapshot.data![0],);
+            return Dummy(leetcode: snapshot.data![1], codeforces:snapshot.data![0]);
           } else if (snapshot.hasError) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,

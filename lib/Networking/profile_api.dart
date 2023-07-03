@@ -5,21 +5,21 @@ import 'package:mlr_app/Models/leetcode_model.dart';
 import '../Models/codechef_model.dart';
 
 class APIRepository{
-  getProfileCodechef(String username)async{
-    var baseurl = "https://codec-api.herokuapp.com/user.info?handle=$username";
-    var url = Uri.parse(baseurl);
-    final response = await http.get(url);
-    if(response.statusCode == 200 )
-      {
-        return CodechefModal.fromJson(jsonDecode(response.body));
-      }
-    else
-      {
-        throw Exception("Failed to load data");
-      }
-  }
+  // getProfileCodechef(String username)async{
+  //   var baseurl = "https://codec-api.herokuapp.com/user.info?handle=$username";
+  //   var url = Uri.parse(baseurl);
+  //   final response = await http.get(url);
+  //   if(response.statusCode == 200 )
+  //     {
+  //       return CodechefModal.fromJson(jsonDecode(response.body));
+  //     }
+  //   else
+  //     {
+  //       throw Exception("Failed to load data");
+  //     }
+  // }
   getProfileCodeforces(String username)async{
-    var baseurl = "https://competitive-coding-api.herokuapp.com/api/codeforces/$username";
+    var baseurl = "https://codeforces.com/api/user.info?handles=$username";
     var url = Uri.parse(baseurl);
     final response = await http.get(url);
     if(response.statusCode == 200 )
@@ -32,7 +32,7 @@ class APIRepository{
     }
   }
   getProfileLeetCode(String username)async{
-    var baseurl = "https://competitive-coding-api.herokuapp.com/api/leetcode/$username";
+    var baseurl = "https://leetcode-stats-api.herokuapp.com/$username";
     var url = Uri.parse(baseurl);
     final response = await http.get(url);
     if(response.statusCode == 200 )

@@ -10,7 +10,7 @@ dependencies:
   url_launcher:
   line_icons:
   google_nav_bar:
-  google_fonts:
+  google_fonts: ^5.1.0
   auto_size_text:
   http:
   firebase_core: ^1.13.1
@@ -22,7 +22,8 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-  flutter_native_timezone: ^2.0.0
+  flutter_native_timezone_updated_gradle: ^2.0.3
+#  flutter_native_timezone: ^2.0.0
   flutter_launcher_icons: ^0.10.0
 
 dev_dependencies:

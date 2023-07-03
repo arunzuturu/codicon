@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Padding(
           padding: const EdgeInsets.all(18.0),
           child: SizedBox(
-              height: size.height*0.73,
+              height: size.height*0.70,
               child: ListView.builder(
                 key: PageStorageKey(this.widget.which),
                   itemCount: widget.contests.length,

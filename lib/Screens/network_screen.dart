@@ -36,13 +36,13 @@ class _NetworkScreenState extends State<NetworkScreen> {
                 ),
               ),
               Container(
-                height: size.height*0.28,
+                height: size.height*0.26,
                 child: Swiper(
                   autoplay: true,
                   autoplayDelay: 4000,
                   itemBuilder: (BuildContext context,int index){
                     var str = widget.contests1[index].end.toString();
-                    if (str != null && str.length >= 5) {
+                    if (str.length >= 5) {
                       str = str.substring(0, str.length - 7);
                     }
                     return Padding(
@@ -69,7 +69,7 @@ class _NetworkScreenState extends State<NetworkScreen> {
                   child: Text("Collections", style: BasicTitle,),
                 ),
               ),
-              SizedBox(height: size.height*0.02,),
+              SizedBox(height: size.height*0.001,),
               SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(18.0),
